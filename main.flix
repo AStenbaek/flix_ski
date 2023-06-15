@@ -1,4 +1,5 @@
 use Monad.{>>=};
+use SKI.{S,K,I,X,Y,Z,App}
 
 
 enum SKI with Eq {
@@ -87,8 +88,10 @@ def parse(prog: String): Option[SKI] =
 
 
 def main(): Unit \ IO =
-    print(Console.greenBright(">>> "))
+    Console.print(Console.greenBright(">>> "))
+    |> Console.flush
     |> Console.readLine
+    |> Result.toOption
     >>= parse
     >>= stepThrough
     |> Option.map(ToString.toString)
